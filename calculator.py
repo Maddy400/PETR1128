@@ -12,6 +12,9 @@ text_input_result = tkinter.Entry(window, font = ("Ariel",30))
 #Use grid to set out the window
 text_input_result.grid(row = 0, column = 0, columnspan = 3)
 
+#Create memory variable for memory storage
+memory = 0 
+
 #Create function to see what button has been clicked
 def button_click_input(num):
     #Get result of button
@@ -23,6 +26,28 @@ def button_click_input(num):
 
 #Clears the input bar
 def button_clear_input():
+    text_input_result.delete(0, tkinter.END)
+
+#Create add to memory function
+def button_add_to_memory():
+    global memory
+    try:
+        memory = int(text_input_result.get())
+        text_input_result.delete(0, tkinter.END)
+    except:
+        text_input_result.delete(0, tkinter.END)
+        text_input_result.insert(0, "Error")
+
+#Create memory recall function
+def button_memory_recall():
+    global memory
+    text_input_result.delete(0, tkinter.END)
+    text_input_result.insert(0, str(memory))
+
+#Create memory clear function
+def button_memory_clear():
+    global memory
+    memory = 0
     text_input_result.delete(0, tkinter.END)
 
 #Create function to add numbers
@@ -125,6 +150,9 @@ button_subtract = tkinter.Button(window, text = "-", padx = 20, pady = 20, comma
 button_multiply = tkinter.Button(window, text = "*", padx = 20, pady = 20, command = button_multiply_input)
 button_divide = tkinter.Button(window, text = "/", padx = 20, pady = 20, command = button_divide_input)
 
+button_memory_add = tkinter.Button(window, text = "M+", padx = 20, pady = 20, command = button_add_to_memory)
+button_recall_memory = tkinter.Button(window, text = "MR", padx = 20, pady = 20, command = button_memory_recall)
+button_clear_memory = tkinter.Button(window, text = "M", padx = 20, pady = 20, command = button_memory_clear)
 
 
 #Place buttons using the grid
@@ -147,6 +175,10 @@ button_equals.grid(row = 5, column = 1, columnspan = 2, sticky = "nsew")
 button_subtract.grid(row=6, column= 0, sticky = "nsew")
 button_multiply.grid(row=6, column= 1, sticky = "nsew")
 button_divide.grid(row=6, column= 2, sticky = "nsew")
+
+button_memory_add.grid(row=7, column= 0, sticky = "nsew")
+button_recall_memory.grid(row=7, column= 1, sticky = "nsew")
+button_clear_memory.grid(row=7, column= 2, sticky = "nsew")
 
 #Run the window
 window.mainloop()
