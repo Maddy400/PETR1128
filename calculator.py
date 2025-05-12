@@ -72,7 +72,7 @@ def button_add_input():
     #Define the symbol
     symbol = "add"
     #Save the first number inputted in the variable 'first'
-    first = int(first_input)
+    first = float(first_input)
     #Deletes the input from the input bar
     text_input_result.delete(0, tkinter.END)
 
@@ -86,7 +86,7 @@ def button_subtract_input():
     #Define the symbol
     symbol = "subtract"
     #Save the first number inputted in the variable 'first'
-    first = int(first_input)
+    first = float(first_input)
     #Deletes the input from the input bar
     text_input_result.delete(0, tkinter.END)
 
@@ -100,7 +100,7 @@ def button_multiply_input():
     #Define the symbol
     symbol = "multiply"
     #Save the first number inputted in the variable 'first'
-    first = int(first_input)
+    first = float(first_input)
     #Deletes the input from the input bar
     text_input_result.delete(0, tkinter.END)
 
@@ -114,7 +114,7 @@ def button_divide_input():
     #Define the symbol
     symbol = "divide"
     #Save the first number inputted in the variable 'first'
-    first = int(first_input)
+    first = float(first_input)
     #Deletes the input from the input bar
     text_input_result.delete(0, tkinter.END)
 
@@ -128,7 +128,7 @@ def button_percent():
     #Define the symbol
     symbol = "percent"
     #Save the first number inputted in the variable 'first'
-    first = int(first_input)
+    first = float(first_input)
     #Deletes the input from the input bar
     text_input_result.delete(0, tkinter.END)
 
@@ -138,7 +138,7 @@ def button_power():
     global first
     global symbol
     symbol = "power"
-    first = int(first_input)
+    first = float(first_input)
     text_input_result.delete(0, tkinter.END)
 
 #Create function for square root
@@ -147,7 +147,7 @@ def button_square():
     global first
     global symbol
     symbol = "square"
-    first = (int(first_input))
+    first = (float(first_input))
     text_input_result.delete(0, tkinter.END)
 
 #Create a function for sin
@@ -156,7 +156,7 @@ def button_sin():
     global first
     global symbol
     symbol = "sin"
-    first = math.radians(int(first_input))
+    first = math.radians(float(first_input))
     text_input_result.delete(0, tkinter.END)
 
 #Create function for cos
@@ -165,7 +165,7 @@ def button_cos():
     global first
     global symbol
     symbol = "cos"
-    first = math.radians(int(first_input))
+    first = math.radians(float(first_input))
     text_input_result.delete(0, tkinter.END)
 
 #Create function for tan
@@ -174,7 +174,7 @@ def button_tan():
     global first
     global symbol
     symbol = "tan"
-    first = math.radians(int(first_input))
+    first = math.radians(float(first_input))
     text_input_result.delete(0, tkinter.END)
 
 def button_inverse_sin():
@@ -182,7 +182,7 @@ def button_inverse_sin():
     global first
     global symbol
     symbol = "asin"
-    first = (int(first_input))
+    first = (float(first_input))
     text_input_result.delete(0, tkinter.END)
 
 def button_inverse_cos():
@@ -190,7 +190,7 @@ def button_inverse_cos():
     global first
     global symbol
     symbol = "acos"
-    first = (int(first_input))
+    first = (float(first_input))
     text_input_result.delete(0, tkinter.END)
 
 def button_inverse_tan():
@@ -198,7 +198,7 @@ def button_inverse_tan():
     global first
     global symbol
     symbol = "atan"
-    first = (int(first_input))
+    first = (float(first_input))
     text_input_result.delete(0, tkinter.END)
 
 #Create function to calculate answer
@@ -278,6 +278,7 @@ button_divide = tkinter.Button(window, text = "/", padx = 20, pady = 20, command
 button_percentage = tkinter.Button(window, text = "%", padx = 20, pady = 20, command = button_percent)
 button_power_of = tkinter.Button(window, text = "^", padx = 20, pady = 20, command = button_power)
 button_square_root = tkinter.Button(window, text = "√", padx = 20, pady = 20, command = button_square)
+button_decimal_point = tkinter.Button(window, text = ".", padx = 20, pady = 20, command = lambda: button_click_input("."))
 
 button_sin_ = tkinter.Button(window, text = "Sin", padx = 20, pady = 20, command = button_sin)
 button_cos_ = tkinter.Button(window, text = "Cos", padx = 20, pady = 20, command = button_cos)
@@ -319,17 +320,19 @@ button_power_of.grid(row=7, column= 0, sticky = "nsew")
 button_percentage.grid(row=7, column= 1, sticky = "nsew")
 button_square_root.grid(row=7, column= 2, sticky = "nsew")
 
+button_decimal_point.grid(row=9, column = 0, sticky = "nsew")
+
 button_sin_.grid(row=8, column= 0, sticky = "nsew")
 button_cos_.grid(row=8, column= 1, sticky = "nsew")
 button_tan_.grid(row=8, column= 2, sticky = "nsew")
 
-button_sin_inverse.grid(row=9, column= 0, sticky = "nsew")
-button_cos_inverse.grid(row=9, column= 1, sticky = "nsew")
-button_tan_inverse.grid(row=9, column= 2, sticky = "nsew")
+button_sin_inverse.grid(row=10, column= 0, sticky = "nsew")
+button_cos_inverse.grid(row=10, column= 1, sticky = "nsew")
+button_tan_inverse.grid(row=10, column= 2, sticky = "nsew")
 
-button_memory_add.grid(row=10, column= 0, sticky = "nsew")
-button_recall_memory.grid(row=10, column= 1, sticky = "nsew")
-button_clear_memory.grid(row=10, column= 2, sticky = "nsew")
+button_memory_add.grid(row=11, column= 0, sticky = "nsew")
+button_recall_memory.grid(row=11, column= 1, sticky = "nsew")
+button_clear_memory.grid(row=11, column= 2, sticky = "nsew")
 
 #Run the window
 window.mainloop()
