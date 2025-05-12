@@ -156,7 +156,7 @@ def button_sin():
     global first
     global symbol
     symbol = "sin"
-    first = (int(first_input))
+    first = math.radians(int(first_input))
     text_input_result.delete(0, tkinter.END)
 
 #Create function for cos
@@ -165,7 +165,7 @@ def button_cos():
     global first
     global symbol
     symbol = "cos"
-    first = (int(first_input))
+    first = math.radians(int(first_input))
     text_input_result.delete(0, tkinter.END)
 
 #Create function for tan
@@ -174,7 +174,7 @@ def button_tan():
     global first
     global symbol
     symbol = "tan"
-    first = (int(first_input))
+    first = math.radians(int(first_input))
     text_input_result.delete(0, tkinter.END)
 
 def button_inverse_sin():
@@ -210,22 +210,26 @@ def button_equal_input():
 
     #If statements to determine what action to perform
     if symbol == "add":
-        text_input_result.insert(0, first + int(second_input))
+        text_input_result.insert(0, first + float(second_input))
     
     elif symbol == "subtract":
-        text_input_result.insert(0, first - int(second_input))
+        text_input_result.insert(0, first - float(second_input))
     
     elif symbol == "divide":
-        text_input_result.insert(0, first / int(second_input))
+        try:
+            text_input_result.insert(0, first / float(second_input))
+        #Avoid error with zero division
+        except ZeroDivisionError:
+            text_input_result.insert(0, "Error")
     
     elif symbol == "multiply":
-        text_input_result.insert(0, first * int(second_input))
+        text_input_result.insert(0, first * float(second_input))
     
     elif symbol == "percent":
         text_input_result.insert(0, first/100)
 
     elif symbol == "power":
-        text_input_result.insert(0, pow(first, int(second_input)))
+        text_input_result.insert(0, pow(first, float(second_input)))
 
     elif symbol == "square":
         text_input_result.insert(0, math.sqrt(first))
@@ -240,13 +244,13 @@ def button_equal_input():
         text_input_result.insert(0, math.tan(first))
         
     elif symbol == "asin":
-        text_input_result.insert(0, math.asin(first))
+        text_input_result.insert(0, math.degrees(math.asin(first)))
 
     elif symbol == "acos":
-        text_input_result.insert(0, math.acos(first))
+        text_input_result.insert(0, math.degrees(math.acos(first)))
 
     elif symbol == "atan":
-        text_input_result.insert(0, math.atan(first))
+        text_input_result.insert(0, math.degrees(math.atan(first)))
     else:
         print("Error")
 
