@@ -30,24 +30,35 @@ def button_clear_input():
 
 #Create add to memory function
 def button_add_to_memory():
+    #Make memory accessible within the function
     global memory
     try:
+        #Store the user input in the memory variable
         memory = int(text_input_result.get())
+        #Deletes the input from the display
         text_input_result.delete(0, tkinter.END)
     except:
+        #Deletes the input from the display
         text_input_result.delete(0, tkinter.END)
+        #Dsplays an error message
         text_input_result.insert(0, "Error")
 
 #Create memory recall function
 def button_memory_recall():
+    #Make memory accessible within the function
     global memory
+    #Deletes the input form the display
     text_input_result.delete(0, tkinter.END)
+    #Inserts what is stored in the memory
     text_input_result.insert(0, str(memory))
 
 #Create memory clear function
 def button_memory_clear():
+    #Make memory accessible within the function
     global memory
+    #Set memory to 0
     memory = 0
+    #Delete the user input from the display
     text_input_result.delete(0, tkinter.END)
 
 #Create function to add numbers
