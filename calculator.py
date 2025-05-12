@@ -1,4 +1,5 @@
 import tkinter
+import math
 
 #Create the window
 window = tkinter.Tk()
@@ -117,6 +118,23 @@ def button_divide_input():
     #Deletes the input from the input bar
     text_input_result.delete(0, tkinter.END)
 
+#Create function for percentage
+def button_percent():
+    first_input = text_input_result.get()
+    #Make the first number inputted a global variable to be accessed in other functions
+    global first
+    #Make the symbol a global variable to be accessed in the equals function
+    global symbol
+    #Define the symbol
+    symbol = "percent"
+    #Save the first number inputted in the variable 'first'
+    first = int(first_input)
+    #Deletes the input from the input bar
+    text_input_result.delete(0, tkinter.END)
+
+
+
+
 #Create function to calculate answer
 def button_equal_input():
     #Retrieve the second input
@@ -137,6 +155,9 @@ def button_equal_input():
     elif symbol == "multiply":
         text_input_result.insert(0, first * int(second_input))
     
+    elif symbol == "percent":
+        text_input_result.insert(0, first/100)
+
     else:
         print("Error")
 
@@ -160,6 +181,8 @@ button_clear = tkinter.Button(window, text = "Clear All", padx = 60, pady = 20, 
 button_subtract = tkinter.Button(window, text = "-", padx = 20, pady = 20, command = button_subtract_input)
 button_multiply = tkinter.Button(window, text = "*", padx = 20, pady = 20, command = button_multiply_input)
 button_divide = tkinter.Button(window, text = "/", padx = 20, pady = 20, command = button_divide_input)
+
+button_percentage = tkinter.Button(window, text = "%", padx = 20, pady = 20, command = button_percent)
 
 button_memory_add = tkinter.Button(window, text = "M+", padx = 20, pady = 20, command = button_add_to_memory)
 button_recall_memory = tkinter.Button(window, text = "MR", padx = 20, pady = 20, command = button_memory_recall)
@@ -187,9 +210,11 @@ button_subtract.grid(row=6, column= 0, sticky = "nsew")
 button_multiply.grid(row=6, column= 1, sticky = "nsew")
 button_divide.grid(row=6, column= 2, sticky = "nsew")
 
-button_memory_add.grid(row=7, column= 0, sticky = "nsew")
-button_recall_memory.grid(row=7, column= 1, sticky = "nsew")
-button_clear_memory.grid(row=7, column= 2, sticky = "nsew")
+button_percentage.grid(row=7, column= 1, sticky = "nsew")
+
+button_memory_add.grid(row=8, column= 0, sticky = "nsew")
+button_recall_memory.grid(row=8, column= 1, sticky = "nsew")
+button_clear_memory.grid(row=8, column= 2, sticky = "nsew")
 
 #Run the window
 window.mainloop()
