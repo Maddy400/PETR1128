@@ -35,7 +35,7 @@ def button_add_to_memory():
     global memory
     try:
         #Store the user input in the memory variable
-        memory = int(text_input_result.get())
+        memory = float(text_input_result.get())
         #Deletes the input from the display
         text_input_result.delete(0, tkinter.END)
     except:
@@ -72,7 +72,7 @@ def button_add_input():
     #Define the symbol
     symbol = "add"
     #Save the first number inputted in the variable 'first'
-    first = float(first_input)
+    first = first_input
     #Deletes the input from the input bar
     text_input_result.delete(0, tkinter.END)
 
@@ -86,7 +86,7 @@ def button_subtract_input():
     #Define the symbol
     symbol = "subtract"
     #Save the first number inputted in the variable 'first'
-    first = float(first_input)
+    first = first_input
     #Deletes the input from the input bar
     text_input_result.delete(0, tkinter.END)
 
@@ -100,7 +100,7 @@ def button_multiply_input():
     #Define the symbol
     symbol = "multiply"
     #Save the first number inputted in the variable 'first'
-    first = float(first_input)
+    first = first_input
     #Deletes the input from the input bar
     text_input_result.delete(0, tkinter.END)
 
@@ -114,7 +114,7 @@ def button_divide_input():
     #Define the symbol
     symbol = "divide"
     #Save the first number inputted in the variable 'first'
-    first = float(first_input)
+    first = first_input
     #Deletes the input from the input bar
     text_input_result.delete(0, tkinter.END)
 
@@ -203,56 +203,64 @@ def button_inverse_tan():
 
 #Create function to calculate answer
 def button_equal_input():
-    #Retrieve the second input
-    second_input = text_input_result.get()
-    #Delete from the input bar
-    text_input_result.delete(0, tkinter.END)
+    global symbol
+    global first
+    try:
+        expression = text_input_result.get()
+        text_input_result.delete(0, tkinter.END)
 
-    #If statements to determine what action to perform
-    if symbol == "add":
-        text_input_result.insert(0, first + float(second_input))
-    
-    elif symbol == "subtract":
-        text_input_result.insert(0, first - float(second_input))
-    
-    elif symbol == "divide":
-        try:
-            text_input_result.insert(0, first / float(second_input))
-        #Avoid error with zero division
-        except ZeroDivisionError:
-            text_input_result.insert(0, "Error")
-    
-    elif symbol == "multiply":
-        text_input_result.insert(0, first * float(second_input))
-    
-    elif symbol == "percent":
-        text_input_result.insert(0, first/100)
+        #If a symbol is set then that specific operation will be executed
+        if symbol:
+            #Ensure that 'first' is a float when performing the operations
+            try:
+                first = float(first)
+            except ValueError:
+                text_input_result.insert(0, "Error")
+                return
 
-    elif symbol == "power":
-        text_input_result.insert(0, pow(first, float(second_input)))
-
-    elif symbol == "square":
-        text_input_result.insert(0, math.sqrt(first))
-
-    elif symbol == "sin":
-        text_input_result.insert(0, math.sin(first))
-    
-    elif symbol == "cos":
-        text_input_result.insert(0, math.cos(first))
-
-    elif symbol == "tan":
-        text_input_result.insert(0, math.tan(first))
-        
-    elif symbol == "asin":
-        text_input_result.insert(0, math.degrees(math.asin(first)))
-
-    elif symbol == "acos":
-        text_input_result.insert(0, math.degrees(math.acos(first)))
-
-    elif symbol == "atan":
-        text_input_result.insert(0, math.degrees(math.atan(first)))
-    else:
-        print("Error")
+            #Execute the operation set by the symbol
+            if symbol == "add":
+                text_input_result.insert(0, first + float(expression))
+            elif symbol == "subtract":
+                text_input_result.insert(0, first - float(expression))
+            elif symbol == "divide":
+                try:
+                    text_input_result.insert(0, first / float(expression))
+                except ZeroDivisionError:
+                    text_input_result.insert(0, "Error")
+            elif symbol == "multiply":
+                text_input_result.insert(0, first * float(expression))
+            elif symbol == "percent":
+                text_input_result.insert(0, first / 100)
+            elif symbol == "power":
+                text_input_result.insert(0, pow(first, float(expression)))
+            elif symbol == "square":
+                text_input_result.insert(0, math.sqrt(first))
+            elif symbol == "sin":
+                text_input_result.insert(0, math.sin(first))
+            elif symbol == "cos":
+                text_input_result.insert(0, math.cos(first))
+            elif symbol == "tan":
+                text_input_result.insert(0, math.tan(first))
+            elif symbol == "asin":
+                text_input_result.insert(0, math.degrees(math.asin(first)))
+            elif symbol == "acos":
+                text_input_result.insert(0, math.degrees(math.acos(first)))
+            elif symbol == "atan":
+                text_input_result.insert(0, math.degrees(math.atan(first)))
+            #Resets the symbol to nothing after calculation
+            symbol = ""  
+        else:
+            #If no symbol is set, treat the input as a full expression and evaluate it
+            try:
+                result = eval(expression)
+                text_input_result.insert(0, str(result))
+            except Exception:
+                text_input_result.insert(0, "Error")
+                
+    except Exception:
+        text_input_result.delete(0, tkinter.END)
+        text_input_result.insert(0, "Error")
 
 #Create buttons
 button_1 = tkinter.Button(window, text = "1", padx = 20, pady = 20, command = lambda: button_click_input(1))
@@ -278,7 +286,10 @@ button_divide = tkinter.Button(window, text = "/", padx = 20, pady = 20, command
 button_percentage = tkinter.Button(window, text = "%", padx = 20, pady = 20, command = button_percent)
 button_power_of = tkinter.Button(window, text = "^", padx = 20, pady = 20, command = button_power)
 button_square_root = tkinter.Button(window, text = "√", padx = 20, pady = 20, command = button_square)
+
 button_decimal_point = tkinter.Button(window, text = ".", padx = 20, pady = 20, command = lambda: button_click_input("."))
+button_bracket_open = tkinter.Button(window, text = "(", padx = 20, pady = 20, command = lambda: button_click_input("("))
+button_bracket_close = tkinter.Button(window, text = ")", padx = 20, pady = 20, command = lambda: button_click_input(")"))
 
 button_sin_ = tkinter.Button(window, text = "Sin", padx = 20, pady = 20, command = button_sin)
 button_cos_ = tkinter.Button(window, text = "Cos", padx = 20, pady = 20, command = button_cos)
@@ -321,6 +332,8 @@ button_percentage.grid(row=7, column= 1, sticky = "nsew")
 button_square_root.grid(row=7, column= 2, sticky = "nsew")
 
 button_decimal_point.grid(row=9, column = 0, sticky = "nsew")
+button_bracket_close.grid(row=9, column = 1, sticky = "nsew")
+button_bracket_open.grid(row=9, column = 2, sticky = "nsew")
 
 button_sin_.grid(row=8, column= 0, sticky = "nsew")
 button_cos_.grid(row=8, column= 1, sticky = "nsew")
