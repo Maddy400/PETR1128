@@ -132,7 +132,14 @@ def button_percent():
     #Deletes the input from the input bar
     text_input_result.delete(0, tkinter.END)
 
-
+#Create function for power
+def button_power():
+    first_input = text_input_result.get()
+    global first
+    global symbol
+    symbol = "power"
+    first = int(first_input)
+    text_input_result.delete(0, tkinter.END)
 
 
 #Create function to calculate answer
@@ -158,6 +165,8 @@ def button_equal_input():
     elif symbol == "percent":
         text_input_result.insert(0, first/100)
 
+    elif symbol == "power":
+        text_input_result.insert(0, pow(first, int(second_input)))
     else:
         print("Error")
 
@@ -183,6 +192,7 @@ button_multiply = tkinter.Button(window, text = "*", padx = 20, pady = 20, comma
 button_divide = tkinter.Button(window, text = "/", padx = 20, pady = 20, command = button_divide_input)
 
 button_percentage = tkinter.Button(window, text = "%", padx = 20, pady = 20, command = button_percent)
+button_power_of = tkinter.Button(window, text = "^", padx = 20, pady = 20, command = button_power)
 
 button_memory_add = tkinter.Button(window, text = "M+", padx = 20, pady = 20, command = button_add_to_memory)
 button_recall_memory = tkinter.Button(window, text = "MR", padx = 20, pady = 20, command = button_memory_recall)
@@ -211,6 +221,7 @@ button_multiply.grid(row=6, column= 1, sticky = "nsew")
 button_divide.grid(row=6, column= 2, sticky = "nsew")
 
 button_percentage.grid(row=7, column= 1, sticky = "nsew")
+button_power_of.grid(row=7, column= 0, sticky = "nsew")
 
 button_memory_add.grid(row=8, column= 0, sticky = "nsew")
 button_recall_memory.grid(row=8, column= 1, sticky = "nsew")
