@@ -201,66 +201,72 @@ def button_inverse_tan():
     first = (float(first_input))
     text_input_result.delete(0, tkinter.END)
 
+def button_log():
+    first_input = text_input_result.get()
+    global first
+    global symbol
+    symbol = "log"
+    first = (float(first_input))
+    text_input_result.delete(0, tkinter.END)
+
 #Create function to calculate answer
 def button_equal_input():
     global symbol
     global first
-    try:
-        expression = text_input_result.get()
-        text_input_result.delete(0, tkinter.END)
+    expression = text_input_result.get()
+    text_input_result.delete(0, tkinter.END)
 
-        #If a symbol is set then that specific operation will be executed
-        if symbol:
-            #Ensure that 'first' is a float when performing the operations
-            try:
-                first = float(first)
-            except ValueError:
-                text_input_result.insert(0, "Error")
-                return
+    #If a symbol is set then that specific operation will be executed
+    if symbol:
+        #Ensure that 'first' is a float when performing the operations
+        try:
+            first = float(first)
+        except ValueError:
+            text_input_result.insert(0, "Error")
+            return
 
-            #Execute the operation set by the symbol
-            if symbol == "add":
-                text_input_result.insert(0, first + float(expression))
-            elif symbol == "subtract":
-                text_input_result.insert(0, first - float(expression))
-            elif symbol == "divide":
-                try:
-                    text_input_result.insert(0, first / float(expression))
-                except ZeroDivisionError:
-                    text_input_result.insert(0, "Error")
-            elif symbol == "multiply":
-                text_input_result.insert(0, first * float(expression))
-            elif symbol == "percent":
-                text_input_result.insert(0, first / 100)
-            elif symbol == "power":
-                text_input_result.insert(0, pow(first, float(expression)))
-            elif symbol == "square":
-                text_input_result.insert(0, math.sqrt(first))
-            elif symbol == "sin":
-                text_input_result.insert(0, math.sin(first))
-            elif symbol == "cos":
-                text_input_result.insert(0, math.cos(first))
-            elif symbol == "tan":
-                text_input_result.insert(0, math.tan(first))
-            elif symbol == "asin":
-                text_input_result.insert(0, math.degrees(math.asin(first)))
-            elif symbol == "acos":
-                text_input_result.insert(0, math.degrees(math.acos(first)))
-            elif symbol == "atan":
-                text_input_result.insert(0, math.degrees(math.atan(first)))
-            #Resets the symbol to nothing after calculation
-            symbol = ""  
-        else:
-            #If no symbol is set, treat the input as a full expression and evaluate it
+        #Execute the operation set by the symbol
+        if symbol == "add":
+            text_input_result.insert(0, first + float(expression))
+        elif symbol == "subtract":
+            text_input_result.insert(0, first - float(expression))
+        elif symbol == "divide":
             try:
-                result = eval(expression)
-                text_input_result.insert(0, str(result))
-            except Exception:
+                text_input_result.insert(0, first / float(expression))
+            except ZeroDivisionError:
                 text_input_result.insert(0, "Error")
-                
-    except Exception:
-        text_input_result.delete(0, tkinter.END)
-        text_input_result.insert(0, "Error")
+        elif symbol == "multiply":
+            text_input_result.insert(0, first * float(expression))
+        elif symbol == "percent":
+            text_input_result.insert(0, first / 100)
+        elif symbol == "power":
+            text_input_result.insert(0, pow(first, float(expression)))
+        elif symbol == "square":
+            text_input_result.insert(0, math.sqrt(first))
+        elif symbol == "sin":
+            text_input_result.insert(0, math.sin(first))
+        elif symbol == "cos":
+            text_input_result.insert(0, math.cos(first))
+        elif symbol == "tan":
+            text_input_result.insert(0, math.tan(first))
+        elif symbol == "asin":
+            text_input_result.insert(0, math.degrees(math.asin(first)))
+        elif symbol == "acos":
+            text_input_result.insert(0, math.degrees(math.acos(first)))
+        elif symbol == "atan":
+            text_input_result.insert(0, math.degrees(math.atan(first)))
+        elif symbol == "log":
+            text_input_result.insert(0, math.log(first, float(expression)))
+        #Resets the symbol to nothing after calculation
+        symbol = ""  
+    else:
+        #If no symbol is set, treat the input as a full expression and evaluate it
+        try:
+            result = eval(expression)
+            text_input_result.insert(0, str(result))
+        except Exception:
+            text_input_result.insert(0, "Error")
+                 
 
 #Create buttons
 button_1 = tkinter.Button(window, text = "1", padx = 20, pady = 20, command = lambda: button_click_input(1))
@@ -298,6 +304,10 @@ button_tan_ = tkinter.Button(window, text = "Tan", padx = 20, pady = 20, command
 button_sin_inverse = tkinter.Button(window, text = "asin", padx = 20, pady = 20, command = button_inverse_sin)
 button_cos_inverse = tkinter.Button(window, text = "acos", padx = 20, pady = 20, command = button_inverse_cos)
 button_tan_inverse = tkinter.Button(window, text = "atan", padx = 20, pady = 20, command = button_inverse_tan)
+
+button_pi = tkinter.Button(window, text = "π", padx = 20, pady = 20, command = lambda: button_click_input(math.pi))
+button_log_ = tkinter.Button(window, text = "Log", padx = 20, pady = 20, command = button_log)
+button_e = tkinter.Button(window, text = "e", padx = 20, pady = 20, command = lambda: button_click_input(math.e))
 
 button_memory_add = tkinter.Button(window, text = "M+", padx = 20, pady = 20, command = button_add_to_memory)
 button_recall_memory = tkinter.Button(window, text = "MR", padx = 20, pady = 20, command = button_memory_recall)
@@ -343,9 +353,13 @@ button_sin_inverse.grid(row=10, column= 0, sticky = "nsew")
 button_cos_inverse.grid(row=10, column= 1, sticky = "nsew")
 button_tan_inverse.grid(row=10, column= 2, sticky = "nsew")
 
-button_memory_add.grid(row=11, column= 0, sticky = "nsew")
-button_recall_memory.grid(row=11, column= 1, sticky = "nsew")
-button_clear_memory.grid(row=11, column= 2, sticky = "nsew")
+button_pi.grid(row=11, column= 0, sticky = "nsew")
+button_log_.grid(row=11, column= 1, sticky = "nsew")
+button_e.grid(row=11, column= 2, sticky = "nsew")
+
+button_memory_add.grid(row=12, column= 0, sticky = "nsew")
+button_recall_memory.grid(row=12, column= 1, sticky = "nsew")
+button_clear_memory.grid(row=12, column= 2, sticky = "nsew")
 
 #Run the window
 window.mainloop()
