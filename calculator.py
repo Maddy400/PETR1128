@@ -1,35 +1,30 @@
-import tkinter
+import tkinter 
 import math
 
-#Create the window
+# Create the window
 window = tkinter.Tk()
-#Set size of window
-window.geometry("300x400")
-#Set the title to Calculator
+window.geometry("320x500")
 window.title("Calculator")
+window.configure(bg = "white")
 
 #Create text input
-text_input_result = tkinter.Entry(window, font = ("Ariel",30))
-#Use grid to set out the window
-text_input_result.grid(row = 0, column = 0, columnspan = 3)
+text_input_result = tkinter.Entry(window, font=("Ariel", 24))
+text_input_result.grid(row=0, column=0, columnspan=4, sticky="nsew")
 
-#Create memory variable for memory storage
-memory = 0 
+#Memory variable set to 0 at the beginning
+memory = 0
 
-#Create function to see what button has been clicked
-def button_click_input(num):
-    #Get result of button
-    current_number = text_input_result.get()
-    #Delete the previous number
+#Create a function to retrive the input from the user
+def button_click_input(value):
+    current = text_input_result.get()
     text_input_result.delete(0, tkinter.END)
-    #Puts the two numbers together so they appear next to each other. Using them as a string avoids the numbers being added together
-    text_input_result.insert(0, str(current_number) + str(num))
+    text_input_result.insert(0, current + str(value))
 
-#Clears the input bar
+#Create a function to clear the input bar
 def button_clear_input():
     text_input_result.delete(0, tkinter.END)
 
-#Create add to memory function
+#Create a function to add to the memory
 def button_add_to_memory():
     #Make memory accessible within the function
     global memory
@@ -41,7 +36,7 @@ def button_add_to_memory():
     except:
         #Deletes the input from the display
         text_input_result.delete(0, tkinter.END)
-        #Dsplays an error message
+        #Deletes the input from the display
         text_input_result.insert(0, "Error")
 
 #Create memory recall function
@@ -62,256 +57,103 @@ def button_memory_clear():
     #Delete the user input from the display
     text_input_result.delete(0, tkinter.END)
 
-#Create function to add numbers
-def button_add_input():
-    first_input = text_input_result.get()
-    #Make the first number inputted a global variable to be accessed in other functions
-    global first
-    #Make the symbol a global variable to be accessed in the equals function
-    global symbol
-    #Define the symbol
-    symbol = "add"
-    #Save the first number inputted in the variable 'first'
-    first = first_input
-    #Deletes the input from the input bar
-    text_input_result.delete(0, tkinter.END)
+#Set the inputs to each function to make the buttons work
+def button_log():
+    button_click_input("log(")
 
-#Create function to subtract
-def button_subtract_input():
-    first_input = text_input_result.get()
-    #Make the first number inputted a global variable to be accessed in other functions
-    global first
-    #Make the symbol a global variable to be accessed in the equals function
-    global symbol
-    #Define the symbol
-    symbol = "subtract"
-    #Save the first number inputted in the variable 'first'
-    first = first_input
-    #Deletes the input from the input bar
-    text_input_result.delete(0, tkinter.END)
-
-#Create function to multiply
-def button_multiply_input():
-    first_input = text_input_result.get()
-    #Make the first number inputted a global variable to be accessed in other functions
-    global first
-    #Make the symbol a global variable to be accessed in the equals function
-    global symbol
-    #Define the symbol
-    symbol = "multiply"
-    #Save the first number inputted in the variable 'first'
-    first = first_input
-    #Deletes the input from the input bar
-    text_input_result.delete(0, tkinter.END)
-
-#Create function to divide
-def button_divide_input():
-    first_input = text_input_result.get()
-    #Make the first number inputted a global variable to be accessed in other functions
-    global first
-    #Make the symbol a global variable to be accessed in the equals function
-    global symbol
-    #Define the symbol
-    symbol = "divide"
-    #Save the first number inputted in the variable 'first'
-    first = first_input
-    #Deletes the input from the input bar
-    text_input_result.delete(0, tkinter.END)
-
-#Create function for percentage
-def button_percent():
-    first_input = text_input_result.get()
-    #Make the first number inputted a global variable to be accessed in other functions
-    global first
-    #Make the symbol a global variable to be accessed in the equals function
-    global symbol
-    #Define the symbol
-    symbol = "percent"
-    #Save the first number inputted in the variable 'first'
-    first = float(first_input)
-    #Deletes the input from the input bar
-    text_input_result.delete(0, tkinter.END)
-
-#Create function for power
-def button_power():
-    first_input = text_input_result.get()
-    global first
-    global symbol
-    symbol = "power"
-    first = float(first_input)
-    text_input_result.delete(0, tkinter.END)
-
-#Create function for square root
-def button_square():
-    first_input = text_input_result.get()
-    global first
-    global symbol
-    symbol = "square"
-    first = (float(first_input))
-    text_input_result.delete(0, tkinter.END)
-
-#Create a function for sin
 def button_sin():
-    first_input = text_input_result.get()
-    global first
-    global symbol
-    symbol = "sin"
-    first = math.radians(float(first_input))
-    text_input_result.delete(0, tkinter.END)
+    button_click_input("sin(")
 
-#Create function for cos
 def button_cos():
-    first_input = text_input_result.get()
-    global first
-    global symbol
-    symbol = "cos"
-    first = math.radians(float(first_input))
-    text_input_result.delete(0, tkinter.END)
+    button_click_input("cos(")
 
-#Create function for tan
 def button_tan():
-    first_input = text_input_result.get()
-    global first
-    global symbol
-    symbol = "tan"
-    first = math.radians(float(first_input))
-    text_input_result.delete(0, tkinter.END)
+    button_click_input("tan(")
 
 def button_inverse_sin():
-    first_input = text_input_result.get()
-    global first
-    global symbol
-    symbol = "asin"
-    first = (float(first_input))
-    text_input_result.delete(0, tkinter.END)
+    button_click_input("asin(")
 
 def button_inverse_cos():
-    first_input = text_input_result.get()
-    global first
-    global symbol
-    symbol = "acos"
-    first = (float(first_input))
-    text_input_result.delete(0, tkinter.END)
+    button_click_input("acos(")
 
 def button_inverse_tan():
-    first_input = text_input_result.get()
-    global first
-    global symbol
-    symbol = "atan"
-    first = (float(first_input))
-    text_input_result.delete(0, tkinter.END)
+    button_click_input("atan(")
 
-def button_log():
-    first_input = text_input_result.get()
-    global first
-    global symbol
-    symbol = "log"
-    first = (float(first_input))
-    text_input_result.delete(0, tkinter.END)
-
-#Create function to calculate answer
+#Create the equals function to calculate
 def button_equal_input():
-    global symbol
-    global first
-    expression = text_input_result.get()
-    text_input_result.delete(0, tkinter.END)
-
-    #If a symbol is set then that specific operation will be executed
-    if symbol:
-        #Ensure that 'first' is a float when performing the operations
-        try:
-            first = float(first)
-        except ValueError:
-            text_input_result.insert(0, "Error")
-            return
-
-        #Execute the operation set by the symbol
-        if symbol == "add":
-            text_input_result.insert(0, first + float(expression))
-        elif symbol == "subtract":
-            text_input_result.insert(0, first - float(expression))
-        elif symbol == "divide":
-            try:
-                text_input_result.insert(0, first / float(expression))
-            except ZeroDivisionError:
-                text_input_result.insert(0, "Error")
-        elif symbol == "multiply":
-            text_input_result.insert(0, first * float(expression))
-        elif symbol == "percent":
-            text_input_result.insert(0, first / 100)
-        elif symbol == "power":
-            text_input_result.insert(0, pow(first, float(expression)))
-        elif symbol == "square":
-            text_input_result.insert(0, math.sqrt(first))
-        elif symbol == "sin":
-            text_input_result.insert(0, math.sin(first))
-        elif symbol == "cos":
-            text_input_result.insert(0, math.cos(first))
-        elif symbol == "tan":
-            text_input_result.insert(0, math.tan(first))
-        elif symbol == "asin":
-            text_input_result.insert(0, math.degrees(math.asin(first)))
-        elif symbol == "acos":
-            text_input_result.insert(0, math.degrees(math.acos(first)))
-        elif symbol == "atan":
-            text_input_result.insert(0, math.degrees(math.atan(first)))
-        elif symbol == "log":
-            text_input_result.insert(0, math.log(first, float(expression)))
-        #Resets the symbol to nothing after calculation
-        symbol = ""  
-    else:
-        #If no symbol is set, treat the input as a full expression and evaluate it
-        try:
-            result = eval(expression)
-            text_input_result.insert(0, str(result))
-        except Exception:
-            text_input_result.insert(0, "Error")
+    try:
+        #Retrieve the input
+        expression = text_input_result.get()
+        #Create a result variable that calculates using the saved methods in the dictionary
+        result = eval(expression, {"__builtins__": None}, {
+            "math": math,
+            "sqrt": math.sqrt,
+            "sin": lambda x: math.sin(math.radians(x)),
+            "cos": lambda x: math.cos(math.radians(x)),
+            "tan": lambda x: math.tan(math.radians(x)),
+            "acos": lambda x: math.acos(math.radians(x)),
+            "asin": lambda x: math.asin(math.radians(x)),
+            "atan": lambda x: math.atan(math.radians(x)),
+            "log": lambda x: math.log10(x),
+            "pi": math.pi,
+            "e": math.e,
+            "pow": pow
+        })
+        #Delete from the input bar
+        text_input_result.delete(0, tkinter.END)
+        #Displays the result
+        text_input_result.insert(0, str(result))
+    except Exception:
+        #Deletes from the input bar
+        text_input_result.delete(0, tkinter.END)
+        #Displays an error message
+        text_input_result.insert(0, "Error")
                  
 
 #Create buttons
-button_1 = tkinter.Button(window, text = "1", padx = 20, pady = 20, command = lambda: button_click_input(1))
-button_2 = tkinter.Button(window, text = "2", padx = 20, pady = 20, command = lambda: button_click_input(2))
-button_3 = tkinter.Button(window, text = "3", padx = 20, pady = 20, command = lambda: button_click_input(3))
+button_1 = tkinter.Button(window, text = "1", padx = 20, pady = 20, command = lambda: button_click_input(1), font=("Arial", 14))
+button_2 = tkinter.Button(window, text = "2", padx = 20, pady = 20, command = lambda: button_click_input(2), font=("Arial", 14))
+button_3 = tkinter.Button(window, text = "3", padx = 20, pady = 20, command = lambda: button_click_input(3), font=("Arial", 14))
 
-button_4 = tkinter.Button(window, text = "4", padx = 20, pady = 20, command = lambda: button_click_input(4))
-button_5 = tkinter.Button(window, text = "5", padx = 20, pady = 20, command = lambda: button_click_input(5))
-button_6 = tkinter.Button(window, text = "6", padx = 20, pady = 20, command = lambda: button_click_input(6))
+button_4 = tkinter.Button(window, text = "4", padx = 20, pady = 20, command = lambda: button_click_input(4), font=("Arial", 14))
+button_5 = tkinter.Button(window, text = "5", padx = 20, pady = 20, command = lambda: button_click_input(5), font=("Arial", 14))
+button_6 = tkinter.Button(window, text = "6", padx = 20, pady = 20, command = lambda: button_click_input(6), font=("Arial", 14))
 
-button_7 = tkinter.Button(window, text = "7", padx = 20, pady = 20, command = lambda: button_click_input(7))
-button_8 = tkinter.Button(window, text = "8", padx = 20, pady = 20, command = lambda: button_click_input(8))
-button_9 = tkinter.Button(window, text = "9", padx = 20, pady = 20, command = lambda: button_click_input(9))
+button_7 = tkinter.Button(window, text = "7", padx = 20, pady = 20, command = lambda: button_click_input(7), font=("Arial", 14))
+button_8 = tkinter.Button(window, text = "8", padx = 20, pady = 20, command = lambda: button_click_input(8), font=("Arial", 14))
+button_9 = tkinter.Button(window, text = "9", padx = 20, pady = 20, command = lambda: button_click_input(9), font=("Arial", 14))
 
-button_0 = tkinter.Button(window, text = "0", padx = 20, pady = 20, command = lambda: button_click_input(0))
-button_add = tkinter.Button(window, text = "+", padx = 20, pady = 20, command = button_add_input)
-button_equals = tkinter.Button(window, text = "=", padx = 70, pady = 20, command = button_equal_input)
-button_clear = tkinter.Button(window, text = "Clear All", padx = 60, pady = 20, command = button_clear_input)
-button_subtract = tkinter.Button(window, text = "-", padx = 20, pady = 20, command = button_subtract_input)
-button_multiply = tkinter.Button(window, text = "*", padx = 20, pady = 20, command = button_multiply_input)
-button_divide = tkinter.Button(window, text = "/", padx = 20, pady = 20, command = button_divide_input)
+button_0 = tkinter.Button(window, text = "0", padx = 20, pady = 20, command = lambda: button_click_input(0), font=("Arial", 14))
+button_add = tkinter.Button(window, text = "+", padx = 20, pady = 20, command = lambda: button_click_input("+"), font=("Arial", 14))
+button_equals = tkinter.Button(window, text = "=", padx = 70, pady = 20, command = button_equal_input, font=("Arial", 14))
+button_clear = tkinter.Button(window, text = "Clear All", padx = 60, pady = 20, command = button_clear_input, font=("Arial", 14))
+button_subtract = tkinter.Button(window, text = "-", padx = 20, pady = 20, command = lambda: button_click_input("-"), font=("Arial", 14))
+button_multiply = tkinter.Button(window, text = "*", padx = 20, pady = 20, command = lambda: button_click_input("*"), font=("Arial", 14))
+button_divide = tkinter.Button(window, text = "/", padx = 20, pady = 20, command = lambda: button_click_input("/"), font=("Arial", 14))
 
-button_percentage = tkinter.Button(window, text = "%", padx = 20, pady = 20, command = button_percent)
-button_power_of = tkinter.Button(window, text = "^", padx = 20, pady = 20, command = button_power)
-button_square_root = tkinter.Button(window, text = "√", padx = 20, pady = 20, command = button_square)
+button_percentage = tkinter.Button(window, text = "%", padx = 20, pady = 20, command = lambda: button_click_input ("%"), font=("Arial", 14))
+button_power_of = tkinter.Button(window, text = "^", padx = 20, pady = 20, command = lambda: button_click_input("**"), font=("Arial", 14))
+button_square_root = tkinter.Button(window, text = "√", padx = 20, pady = 20, command = lambda: button_click_input("sqrt("), font=("Arial", 14))
 
-button_decimal_point = tkinter.Button(window, text = ".", padx = 20, pady = 20, command = lambda: button_click_input("."))
-button_bracket_open = tkinter.Button(window, text = "(", padx = 20, pady = 20, command = lambda: button_click_input("("))
-button_bracket_close = tkinter.Button(window, text = ")", padx = 20, pady = 20, command = lambda: button_click_input(")"))
+button_decimal_point = tkinter.Button(window, text = ".", padx = 20, pady = 20, command = lambda: button_click_input("."), font=("Arial", 14))
+button_bracket_open = tkinter.Button(window, text = "(", padx = 20, pady = 20, command = lambda: button_click_input("("), font=("Arial", 14))
+button_bracket_close = tkinter.Button(window, text = ")", padx = 20, pady = 20, command = lambda: button_click_input(")"), font=("Arial", 14))
 
-button_sin_ = tkinter.Button(window, text = "Sin", padx = 20, pady = 20, command = button_sin)
-button_cos_ = tkinter.Button(window, text = "Cos", padx = 20, pady = 20, command = button_cos)
-button_tan_ = tkinter.Button(window, text = "Tan", padx = 20, pady = 20, command = button_tan)
+button_sin_ = tkinter.Button(window, text = "Sin", padx = 20, pady = 20, command = button_sin, font=("Arial", 14))
+button_cos_ = tkinter.Button(window, text = "Cos", padx = 20, pady = 20, command = button_cos, font=("Arial", 14))
+button_tan_ = tkinter.Button(window, text = "Tan", padx = 20, pady = 20, command = button_tan, font=("Arial", 14))
 
-button_sin_inverse = tkinter.Button(window, text = "asin", padx = 20, pady = 20, command = button_inverse_sin)
-button_cos_inverse = tkinter.Button(window, text = "acos", padx = 20, pady = 20, command = button_inverse_cos)
-button_tan_inverse = tkinter.Button(window, text = "atan", padx = 20, pady = 20, command = button_inverse_tan)
+button_sin_inverse = tkinter.Button(window, text = "Asin", padx = 20, pady = 20, command = button_inverse_sin, font=("Arial", 14))
+button_cos_inverse = tkinter.Button(window, text = "Acos", padx = 20, pady = 20, command = button_inverse_cos, font=("Arial", 14))
+button_tan_inverse = tkinter.Button(window, text = "Atan", padx = 20, pady = 20, command = button_inverse_tan, font=("Arial", 14))
 
-button_pi = tkinter.Button(window, text = "π", padx = 20, pady = 20, command = lambda: button_click_input(math.pi))
-button_log_ = tkinter.Button(window, text = "Log", padx = 20, pady = 20, command = button_log)
-button_e = tkinter.Button(window, text = "e", padx = 20, pady = 20, command = lambda: button_click_input(math.e))
+button_pi = tkinter.Button(window, text = "π", padx = 20, pady = 20, command = lambda: button_click_input(math.pi), font=("Arial", 14))
+button_log_ = tkinter.Button(window, text = "Log", padx = 20, pady = 20, command = button_log, font=("Arial", 14))
+button_e = tkinter.Button(window, text = "e", padx = 20, pady = 20, command = lambda: button_click_input(math.e), font=("Arial", 14))
 
-button_memory_add = tkinter.Button(window, text = "M+", padx = 20, pady = 20, command = button_add_to_memory)
-button_recall_memory = tkinter.Button(window, text = "MR", padx = 20, pady = 20, command = button_memory_recall)
-button_clear_memory = tkinter.Button(window, text = "M", padx = 20, pady = 20, command = button_memory_clear)
+button_memory_add = tkinter.Button(window, text = "M+", padx = 20, pady = 20, command = button_add_to_memory, font=("Arial", 14))
+button_recall_memory = tkinter.Button(window, text = "MR", padx = 20, pady = 20, command = button_memory_recall, font=("Arial", 14))
+button_clear_memory = tkinter.Button(window, text = "M", padx = 20, pady = 20, command = button_memory_clear, font=("Arial", 14))
 
 
 #Place buttons using the grid
@@ -342,8 +184,8 @@ button_percentage.grid(row=7, column= 1, sticky = "nsew")
 button_square_root.grid(row=7, column= 2, sticky = "nsew")
 
 button_decimal_point.grid(row=9, column = 0, sticky = "nsew")
-button_bracket_close.grid(row=9, column = 1, sticky = "nsew")
-button_bracket_open.grid(row=9, column = 2, sticky = "nsew")
+button_bracket_open.grid(row=9, column = 1, sticky = "nsew")
+button_bracket_close.grid(row=9, column = 2, sticky = "nsew")
 
 button_sin_.grid(row=8, column= 0, sticky = "nsew")
 button_cos_.grid(row=8, column= 1, sticky = "nsew")
