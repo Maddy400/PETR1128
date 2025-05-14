@@ -203,6 +203,29 @@ button_memory_add.grid(row=12, column= 0, sticky = "nsew")
 button_recall_memory.grid(row=12, column= 1, sticky = "nsew")
 button_clear_memory.grid(row=12, column= 2, sticky = "nsew")
 
+
+
+#For unit test
+def evaluate_test(expression):
+    try:
+        result = eval(expression, {"__builtins__": None}, {
+            "math": math,
+            "sqrt": math.sqrt,
+            "sin": lambda x: math.sin(math.radians(x)),
+            "cos": lambda x: math.cos(math.radians(x)),
+            "tan": lambda x: math.tan(math.radians(x)),
+            "acos": lambda x: math.acos(math.radians(x)),
+            "asin": lambda x: math.asin(math.radians(x)),
+            "atan": lambda x: math.atan(math.radians(x)),
+            "log": lambda x: math.log10(x),
+            "pi": math.pi,
+            "e": math.e,
+            "pow": pow
+        })
+        return result
+    except Exception:
+        return "Error"
+    
 #Run the window
 window.mainloop()
 
