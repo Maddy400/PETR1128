@@ -1,7 +1,7 @@
 # PETR1128
 This program is a scientific calculator with many different features such as brackets, trigonometric functions, and constants such as pi and e
 
-#Features
+# Features
 1. Addition
 2. Subtraction
 3. Multiplication
